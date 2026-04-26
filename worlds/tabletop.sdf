@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<!--
+  Tabletop scene for the Gemini Robotics-ER demo:
+  apple, orange, banana, mug, basket sitting on a wooden table, lit overhead,
+  with a downward-facing camera and a floating parallel-jaw gripper.
+-->
+<sdf version="1.10">
+  <world name="tabletop">
+    <gravity>0 0 -9.81</gravity>
+
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.9 0.9 0.9 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.4 0.2 -0.9</direction>
+    </light>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry><plane><normal>0 0 1</normal><size>10 10</size></plane></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><plane><normal>0 0 1</normal><size>10 10</size></plane></geometry>
+          <material>
+            <ambient>0.5 0.5 0.5 1</ambient>
+            <diffuse>0.6 0.6 0.6 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="table">
+      <static>true</static>
+      <pose>0.5 0 0.375 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.8 0.8 0.75</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.8 0.8 0.75</size></box></geometry>
+          <material>
+            <ambient>0.5 0.32 0.18 1</ambient>
+            <diffuse>0.7 0.5 0.3 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="apple">
+      <pose>0.4 -0.2 0.78 0 0 0</pose>
+      <link name="link">
+        <inertial><mass>0.10</mass>
+          <inertia><ixx>1e-4</ixx><iyy>1e-4</iyy><izz>1e-4</izz>
+                   <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+        </inertial>
+        <collision name="c"><geometry><sphere><radius>0.030</radius></sphere></geometry></collision>
+        <visual name="v"><geometry><sphere><radius>0.030</radius></sphere></geometry>
+          <material><ambient>0.7 0.05 0.05 1</ambient><diffuse>0.95 0.10 0.10 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="orange">
+      <pose>0.62 -0.18 0.78 0 0 0</pose>
+      <link name="link">
+        <inertial><mass>0.12</mass>
+          <inertia><ixx>1e-4</ixx><iyy>1e-4</iyy><izz>1e-4</izz>
+                   <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+        </inertial>
+        <collision name="c"><geometry><sphere><radius>0.035</radius></sphere></geometry></collision>
+        <visual name="v"><geometry><sphere><radius>0.035</radius></sphere></geometry>
+          <material><ambient>0.75 0.40 0.05 1</ambient><diffuse>1.00 0.55 0.05 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="banana">
+      <pose>0.48 0.05 0.77 0 1.5708 0.4</pose>
+      <link name="link">
+        <inertial><mass>0.12</mass>
+          <inertia><ixx>1e-4</ixx><iyy>1e-4</iyy><izz>1e-4</izz>
+                   <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+        </inertial>
+        <collision name="c"><geometry><cylinder><radius>0.018</radius><length>0.16</length></cylinder></geometry></collision>
+        <visual name="v"><geometry><cylinder><radius>0.018</radius><length>0.16</length></cylinder></geometry>
+          <material><ambient>0.85 0.80 0.10 1</ambient><diffuse>1.00 0.95 0.20 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="mug">
+      <pose>0.70 0.18 0.795 0 0 0</pose>
+      <link name="link">
+        <inertial><mass>0.20</mass>
+          <inertia><ixx>2e-4</ixx><iyy>2e-4</iyy><izz>2e-4</izz>
+                   <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+        </inertial>
+        <collision name="c"><geometry><cylinder><radius>0.040</radius><length>0.090</length></cylinder></geometry></collision>
+        <visual name="v"><geometry><cylinder><radius>0.040</radius><length>0.090</length></cylinder></geometry>
+          <material><ambient>0.10 0.10 0.10 1</ambient><diffuse>0.20 0.20 0.20 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="basket">
+      <static>true</static>
+      <pose>0.30 0.25 0.795 0 0 0</pose>
+      <link name="bottom">
+        <pose>0 0 0 0 0 0</pose>
+        <collision name="c"><geometry><box><size>0.16 0.16 0.005</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.16 0.16 0.005</size></box></geometry>
+          <material><ambient>0.40 0.25 0.10 1</ambient><diffuse>0.55 0.35 0.15 1</diffuse></material>
+        </visual>
+      </link>
+      <link name="wall_n"><pose>0 0.0775 0.04 0 0 0</pose>
+        <collision name="c"><geometry><box><size>0.16 0.005 0.08</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.16 0.005 0.08</size></box></geometry>
+          <material><ambient>0.40 0.25 0.10 1</ambient><diffuse>0.55 0.35 0.15 1</diffuse></material>
+        </visual>
+      </link>
+      <link name="wall_s"><pose>0 -0.0775 0.04 0 0 0</pose>
+        <collision name="c"><geometry><box><size>0.16 0.005 0.08</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.16 0.005 0.08</size></box></geometry>
+          <material><ambient>0.40 0.25 0.10 1</ambient><diffuse>0.55 0.35 0.15 1</diffuse></material>
+        </visual>
+      </link>
+      <link name="wall_e"><pose>0.0775 0 0.04 0 0 0</pose>
+        <collision name="c"><geometry><box><size>0.005 0.16 0.08</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.005 0.16 0.08</size></box></geometry>
+          <material><ambient>0.40 0.25 0.10 1</ambient><diffuse>0.55 0.35 0.15 1</diffuse></material>
+        </visual>
+      </link>
+      <link name="wall_w"><pose>-0.0775 0 0.04 0 0 0</pose>
+        <collision name="c"><geometry><box><size>0.005 0.16 0.08</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.005 0.16 0.08</size></box></geometry>
+          <material><ambient>0.40 0.25 0.10 1</ambient><diffuse>0.55 0.35 0.15 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Overhead camera, 1.5 m above the table center, looking straight down.
+         Pitch +pi/2 about Y rotates the default +X-forward camera to look along -Z. -->
+    <model name="overhead_camera">
+      <static>true</static>
+      <pose>0.5 0 1.5 0 1.5708 0</pose>
+      <link name="link">
+        <visual name="v"><geometry><box><size>0.05 0.05 0.05</size></box></geometry>
+          <material><ambient>0.1 0.1 0.1 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material>
+        </visual>
+        <sensor name="camera" type="camera">
+          <camera>
+            <horizontal_fov>1.0472</horizontal_fov>
+            <image><width>800</width><height>600</height><format>R8G8B8</format></image>
+            <clip><near>0.1</near><far>10.0</far></clip>
+          </camera>
+          <always_on>true</always_on>
+          <update_rate>15</update_rate>
+          <visualize>false</visualize>
+          <topic>camera</topic>
+        </sensor>
+      </link>
+    </model>
+
+    <include>
+      <uri>model://parallel_jaw_gripper</uri>
+      <pose>0.5 -0.35 1.05 0 0 0</pose>
+    </include>
+  </world>
+</sdf>
