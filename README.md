@@ -14,10 +14,10 @@ prompt patterns and response parsing from the notebook and connects them to
 ROS topics, services, a simulated camera, and a controllable gripper.
 
 ## Demo
-
-| Tabletop scene (overhead camera) | Live annotated stream after a service call |
+Still a work in progress 
+| Tabletop scene (overhead camera)
 |---|---|
-| ![raw](docs/scene_raw.png) | ![annotated](docs/scene_annotated.png) |
+| ![raw](docs/scene_raw.png) 
 
 The left image is the raw view from the simulated overhead camera in the
 Gazebo `tabletop` world (apple, orange, banana, mug, basket on a wooden
